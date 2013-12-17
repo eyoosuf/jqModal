@@ -64,7 +64,7 @@
 		open: function(s, t) {
 			var h = H[s],
 				c = h.c,
-				cc = '.' + c.closeClass,
+				cc = '.' + $.map(c.closeClass.split(","), $.trim).join(", ."),
 				z = (parseInt(h.w.css('z-index'))),
 				z = (z > 0) ? z : 3000,
 				o = $('<div></div>').css({
