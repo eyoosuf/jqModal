@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Jqmodal by yoosuf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Jqmodal</h1>
+      <h2 class="project-tagline">[DISCONTINUED] jqModal is a plugin for jQuery to help you display notices, dialogs, and modal windows in a web browser. It is flexible and tiny, akin to a &quot;Swiss Army Knife&quot;, and makes a great base as a general purpose windowing framework.</h2>
+      <a href="https://github.com/yoosuf/jqModal" class="btn">View on GitHub</a>
+      <a href="https://github.com/yoosuf/jqModal/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/yoosuf/jqModal/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jqmodal" class="anchor" href="#jqmodal" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jqModal</h1>
+
+<p>jqModal is a plugin for jQuery to help you display modals, popups, and notices. It is flexible and tiny, akin to a "Swiss Army Knife", and provides a great base for your windowing needs.</p>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h1>
+
+<ul>
+<li>Designer Frieldly - Use <em>your</em> HTML+CSS for Layout and Styling</li>
+<li>Translator/i18n friendly - No hardcoded English strings</li>
+<li>Developer friendly - Extensible through callbacks to make anything possible (gallery slideshows, video-conferencing, &amp;c)</li>
+<li>Simple support for remotely loaded content (aka "ajax")</li>
+<li>Multiple Modals per page (including nested Modal-in-Modal)</li>
+<li>Supported by all browsers capable of running jQuery 1.2.3+</li>
+</ul>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>markup</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">a</span>
+  <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span>
+  <span class="pl-e">data-modal</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ video_id }}<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>$//www.youtube.com/embed/{{ video_id }}<span class="pl-pds">"</span></span>&gt;
+  Watch&lt;/<span class="pl-ent">a</span>&gt;
+
+&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-dialog modal-video<span class="pl-pds">"</span></span> <span class="pl-e">data-modal</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ video_id }}<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">iframe</span>
+    <span class="pl-e">width</span>=<span class="pl-s"><span class="pl-pds">"</span>560<span class="pl-pds">"</span></span>
+    <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>315<span class="pl-pds">"</span></span>
+    <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>//www.youtube.com/embed/{{ video_id }}<span class="pl-pds">"</span></span>
+    <span class="pl-e">frameborder</span>=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>
+    <span class="pl-e">allowfullscreen</span>&gt;&lt;/<span class="pl-ent">iframe</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;
+</pre></div>
+
+<p>script</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>div.modal-dialog<span class="pl-pds">'</span></span>).<span class="pl-en">each</span>(<span class="pl-k">function</span>(){
+
+  <span class="pl-k">var</span> modal_id <span class="pl-k">=</span> <span class="pl-v">this</span>.<span class="pl-c1">id</span> <span class="pl-k">||</span> <span class="pl-en">$</span>(<span class="pl-v">this</span>).<span class="pl-c1">data</span>(<span class="pl-s"><span class="pl-pds">'</span>modal<span class="pl-pds">'</span></span>);
+  <span class="pl-k">var</span> trigger <span class="pl-k">=</span> <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>a.modal-trigger[data-modal="<span class="pl-pds">'</span></span> <span class="pl-k">+</span> modal_id <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>"]<span class="pl-pds">'</span></span>);
+
+  <span class="pl-en">$</span>(<span class="pl-v">this</span>).<span class="pl-en">jqm</span>({
+    toTop<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    trigger<span class="pl-k">:</span> trigger
+  });
+
+});
+</pre></div>
+
+<p>styling</p>
+
+<div class="highlight highlight-source-css"><pre><span class="pl-ent">div</span><span class="pl-e">.modal-dialog</span> {
+    <span class="pl-c1"><span class="pl-c1">display</span></span>: <span class="pl-c1">none</span>;
+    <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">absolute</span>;
+    <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">50<span class="pl-k">%</span></span>;
+    <span class="pl-c1"><span class="pl-c1">margin-left</span></span>: <span class="pl-c1">-288<span class="pl-k">px</span></span>;
+    <span class="pl-c1"><span class="pl-c1">padding</span></span>: <span class="pl-c1">6<span class="pl-k">px</span></span> <span class="pl-c1">0</span>;
+    <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">fixed</span>;
+    <span class="pl-c1"><span class="pl-c1">text-align</span></span>: <span class="pl-c1">center</span>;
+    <span class="pl-c1"><span class="pl-c1">top</span></span>: <span class="pl-c1">17<span class="pl-k">%</span></span>;
+    <span class="pl-c1"><span class="pl-c1">width</span></span>: <span class="pl-c1">576<span class="pl-k">px</span></span>;
+    <span class="pl-c1"><span class="pl-c1">background</span></span>: <span class="pl-c1">#FFF</span>;
+}
+
+<span class="pl-ent">div</span><span class="pl-e">.modal-dialog.modal-video</span> {
+  <span class="pl-c1"><span class="pl-c1">background-color</span></span>: <span class="pl-c1">transparent</span>;
+}
+
+<span class="pl-ent">div</span><span class="pl-e">.jqmOverlay</span> {
+    <span class="pl-c">/* background-color: #FFF; */</span> <span class="pl-c">/* lighten background */</span>
+    <span class="pl-c1"><span class="pl-c1">background-color</span></span>: <span class="pl-c1">#000</span>; <span class="pl-c">/* darken background */</span>
+}
+</pre></div>
+
+<p>Read the documenttion and more at <a href="http://jquery.iceburg.net/jqModal">http://jquery.iceburg.net/jqModal</a></p>
+
+<p>See <a href="http://jquery.iceburg.net/jqModal/#examples">Examples / Demonstration</a></p>
+
+<h1>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development</h1>
+
+<p>Development of jqModal occurs in the -master branch on <a href="https://github.com/briceburg/jqModal/blob/master/jqModal.js">jqModal.js</a>.
+The <a href="https://github.com/briceburg/jqModal/blob/master/CHANGELOG.md">CHANGELOG.md</a> is to be kept up to date with changes.</p>
+
+<h2>
+<a id="release-process" class="anchor" href="#release-process" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Release Process</h2>
+
+<ul>
+<li>Version jqModal.js header <code>&lt;semver&gt; (YYYY.MM.DD +r&lt;revision&gt;)</code>
+
+<ul>
+<li>Update package.json, bumping  version</li>
+</ul>
+</li>
+<li>Ensure changelog is up to date</li>
+<li>Tag with  : <code>git tag &lt;semver&gt; &amp;&amp; git push origin --tags</code> to publish.
+
+<ul>
+<li>add release notes via github interface</li>
+</ul>
+</li>
+<li><code>npm publish ./</code></li>
+</ul>
+
+<h1>
+<a id="get-involved" class="anchor" href="#get-involved" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get Involved</h1>
+
+<p>Report issues to the github issue tracker.</p>
+
+<ul>
+<li><a href="https://github.com/briceburg/jqModal/issues">https://github.com/briceburg/jqModal/issues</a></li>
+</ul>
+
+<p>For <em>support</em>, please post to stackoverflow using the jqmodal tag:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/ask?tags=jqmodal">http://stackoverflow.com/questions/ask?tags=jqmodal</a></li>
+</ul>
+
+<p>The jqModal website code is available on github -- please do contribute improvements.</p>
+
+<ul>
+<li><a href="https://github.com/iceburg-net/jquery.iceburg.net/tree/master/www-1/jqModal">https://github.com/iceburg-net/jquery.iceburg.net/tree/master/www-1/jqModal</a></li>
+</ul>
+
+<h1>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h1>
+
+<p>Brice Burgess <a href="https://twitter.com/IceburgBrice">@iceburgBrice</a></p>
+
+<p>Released under the MIT License: <a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/yoosuf/jqModal">Jqmodal</a> is maintained by <a href="https://github.com/yoosuf">yoosuf</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
